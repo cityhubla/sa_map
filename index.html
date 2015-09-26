@@ -39,7 +39,7 @@
                 <p>There are #insert number of schools# that teach architecture. Click on a marker to learn more.</p>
 
                 <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-
+             <button class="ui-button" onclick="sidebar.close()">Check out the map!</button>   
             </div>
 
             <div class="sidebar-pane" id="profile">
@@ -81,7 +81,7 @@
                 fillOpacity: 0.8
                 },
             pointToLayer: function(feature, latlon) {
-            return L.circleMarker(latlon, 5).bindPopup("<h2>"+feature.properties.School+"</h2>"+feature.properties.Street);
+            return L.circleMarker(latlon, 5).bindPopup("<h2>"+feature.properties.School+"</h2><p>"+feature.properties.Street+"<br>"+feature.properties.City+", "+feature.properties.State+" "+feature.properties.Country);
             }
         }).addTo(map);
         });

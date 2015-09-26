@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SUPER//ARCHITECTS | MAP OF ARCHITECTURE SCHOOLS</title>
+	<meta charset="utf-8" />
+	<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
+    <script src="js/sidebar-v2-master/js/leaflet-sidebar.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/leaflet-sidebar.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+</head>
+<body>
+    <div id="sidebar" class="sidebar collapsed">
+        <!-- Nav tabs -->
+        <div class="sidebar-tabs">
+            <ul role="tablist">
+                <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+                <li><a href="#profile" role="tab"><i class="fa fa-user"></i></a></li>
+                <li class="disabled"><a href="#messages" role="tab"><i class="fa fa-envelope"></i></a></li>
+            </ul>
+
+            <ul role="tablist">
+                <li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
+            </ul>
+        </div>
+
+        <!-- Tab panes -->
+        <div class="sidebar-content">
+            <div class="sidebar-pane" id="home">
+                <h1 class="sidebar-header">
+                    SUPER//ARCHITECTS
+                    <div class="sidebar-close"><i class="fa fa-caret-left"></i></div>
+                </h1>
+
+                <p>There are #insert number of schools# that teach architecture. Click on a marker to learn more.</p>
+
+                <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+
+            </div>
+
+            <div class="sidebar-pane" id="profile">
+                <h1 class="sidebar-header">Contact<div class="sidebar-close"><i class="fa fa-caret-left"></i></div></h1>
+                <p>Your school out of date or not on the Super Architect's Map? Contact us at: superarchitects.publication@gmail.com</p>
+            </div>
+
+            <div class="sidebar-pane" id="messages">
+                <h1 class="sidebar-header">Messages<div class="sidebar-close"><i class="fa fa-caret-left"></i></div></h1>
+            </div>
+
+            <div class="sidebar-pane" id="settings">
+                <h1 class="sidebar-header">Settings<div class="sidebar-close"><i class="fa fa-caret-left"></i></div></h1>
+            </div>
+        </div>
+    </div>
+
+	<div id="map" class="sidebar-map"></div>
+
+	<script>
+         var map = L.map('map')
+        .setView([34.147844, -118.144392], 6);
+        
+
+        //Code to add Basemaps
+        var stamenmap = L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png').addTo(map);
+   
+        //Create locations for geojson
+        var schools="data/archSchools.geojson";
+           
+        //Styles and loads the landmarks
+        $.getJSON(schools, function(data) {
+        var schoolmarkers = L.geoJson(data, {
+            style:{
+                fillColor:"#EC2264",
+                color: "#000",
+                weight: 0,
+                opacity: 0,
+                fillOpacity: 0.8
+                },
+            pointToLayer: function(feature, latlon) {
+            return L.circleMarker(latlon, 5).bindPopup("<h2>"+feature.properties.School+"</h2>"+feature.properties.Street);
+            }
+        }).addTo(map);
+        });
+
+        var sidebar = L.control.sidebar('sidebar').addTo(map);
+        sidebar.open("home");
+	</script>
+</body>
+</html>

@@ -15,7 +15,9 @@ body { margin: 0; padding: 0;}
 #map { position:fixed; top:0; bottom:0; width:100%; }
 
 
-
+.leaflet-popup-content-wrapper{
+width:345px;
+}
 .ui-button {
     background:#EC2264;
     color:#FFF;

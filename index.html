@@ -80,14 +80,20 @@
                 opacity: 0,
                 fillOpacity: 0.8
                 },
-            pointToLayer: function(feature, latlon) {
-            return L.circleMarker(latlon, 5).bindPopup("<h2>"+feature.properties.School+"</h2><p>"+feature.properties.Street+"<br>"+feature.properties.City+", "+feature.properties.State+" "+feature.properties.Country);
+            pointToLayer: function(feature, latlon) {map.setView(latlon);
+            return L.circleMarker(latlon, 5).bindPopup("<img src='http://maps.googleapis.com/maps/api/streetview?size=300x200&location="+latlon.lat+","+latlon.lng+"&key=AIzaSyAQyxLRvllxVrZxxMKTzLTlZZi6rtR_AKE'>"+
+                "<h2>"+feature.properties.School+"</h2><p>"+feature.properties.Street+"<br>"+feature.properties.City+", "+feature.properties.State+" "+feature.properties.Country);
             }
         }).addTo(map);
         });
 
         var sidebar = L.control.sidebar('sidebar').addTo(map);
         sidebar.open("home");
+        
+        //PanTo Center on Popup Open
+        map.on('popupopen', function(e){
+        map.panTo(e.popup._latlng, {animation: true});
+        })
 	</script>
 </body>
 </html>

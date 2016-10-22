@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>SUPER//ARCHITECTS | MAP OF ARCHITECTURE SCHOOLS</title>
+	<title>S//A | MAP OF THESIS PROJECTS</title>
 	<meta charset="utf-8" />
 	<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -39,12 +39,12 @@
                 <p>There are #insert number of schools# that teach architecture. Click on a marker to learn more.</p>
 
                 <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-             <button class="ui-button" onclick="sidebar.close()">Check out the map!</button>   
+             <button class="ui-button" onclick="sidebar.close()">Check out the map!</button>
             </div>
 
             <div class="sidebar-pane" id="profile">
                 <h1 class="sidebar-header">Contact<div class="sidebar-close"><i class="fa fa-caret-left"></i></div></h1>
-                <p>Your school out of date or not on the Super Architect's Map? Contact us at: superarchitects.publication@gmail.com</p>
+                <p>S//A's THESIS Map? Contact us at: architecturalmappingplatform@gmail.com</p>
             </div>
 
             <div class="sidebar-pane" id="messages">
@@ -62,14 +62,14 @@
 	<script>
          var map = L.map('map')
         .setView([34.147844, -118.144392], 6);
-        
+
 
         //Code to add Basemaps
         var stamenmap = L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png').addTo(map);
-   
+
         //Create locations for geojson
         var schools="data/archSchools.geojson";
-           
+
         //Styles and loads the landmarks
         $.getJSON(schools, function(data) {
         var schoolmarkers = L.geoJson(data, {
@@ -89,7 +89,7 @@
 
         var sidebar = L.control.sidebar('sidebar').addTo(map);
         sidebar.open("home");
-        
+
         //PanTo Center on Popup Open
         map.on('popupopen', function(e){
         map.panTo(e.popup._latlng, {animation: true});
